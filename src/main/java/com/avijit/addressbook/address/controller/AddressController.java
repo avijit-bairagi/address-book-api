@@ -32,7 +32,7 @@ public class AddressController {
         Address address = addressService.save(mapper.map(postDTO, Address.class));
 
         response.setCode(ResponseStatus.SUCCESS.value());
-        response.setCode("Address saved successfully.");
+        response.setMessage("Address saved successfully.");
         response.setData(address);
 
         return ResponseEntity.ok(response);
@@ -51,13 +51,13 @@ public class AddressController {
             address = addressService.update(address);
 
             response.setCode(ResponseStatus.SUCCESS.value());
-            response.setCode("Address updated successfully.");
+            response.setMessage("Address updated successfully.");
             response.setData(address);
 
         } catch (NotFoundException e) {
             e.printStackTrace();
             response.setCode(e.getCode());
-            response.setCode(e.getMessage());
+            response.setMessage(e.getMessage());
         }
 
         if (response.getCode().equalsIgnoreCase(ResponseStatus.SUCCESS.value()))
@@ -74,7 +74,7 @@ public class AddressController {
         List<Address> addresses = addressService.getAll();
 
         response.setCode(ResponseStatus.SUCCESS.value());
-        response.setCode("Address(s) fetched successfully.");
+        response.setMessage("Address(s) fetched successfully.");
         response.setData(addresses);
 
         return ResponseEntity.ok(response);

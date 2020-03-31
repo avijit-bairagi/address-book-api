@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
     public Address update(Address address) throws NotFoundException {
 
         if (addressRepository.findById(address.getId()).isEmpty())
-            throw new NotFoundException(ResponseStatus.NOT_FOUND.value(), "Address not found");
+            throw new NotFoundException(ResponseStatus.NOT_FOUND.value(), "Address not found!");
 
         return addressRepository.save(address);
     }
