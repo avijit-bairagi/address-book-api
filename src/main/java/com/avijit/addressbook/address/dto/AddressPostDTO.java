@@ -1,7 +1,12 @@
 package com.avijit.addressbook.address.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 public class AddressPostDTO {
 
     @NotNull(message = "name must not be null")
