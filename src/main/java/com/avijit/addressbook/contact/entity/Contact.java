@@ -1,4 +1,4 @@
-package com.avijit.addressbook.address.entity;
+package com.avijit.addressbook.contact.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +10,8 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-@Entity(name = "address")
-public class Address {
+@Entity(name = "contacts")
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

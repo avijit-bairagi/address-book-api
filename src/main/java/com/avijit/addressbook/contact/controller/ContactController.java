@@ -1,11 +1,11 @@
-package com.avijit.addressbook.address.controller;
+package com.avijit.addressbook.contact.controller;
 
-import com.avijit.addressbook.address.dto.AddressPostDTO;
-import com.avijit.addressbook.address.entity.Address;
-import com.avijit.addressbook.address.service.AddressService;
 import com.avijit.addressbook.common.ResponseStatus;
 import com.avijit.addressbook.common.dto.Response;
 import com.avijit.addressbook.common.exception.NotFoundException;
+import com.avijit.addressbook.contact.dto.ContactPostDTO;
+import com.avijit.addressbook.contact.entity.Contact;
+import com.avijit.addressbook.contact.service.ContactService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,44 +15,44 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("address/")
-public class AddressController {
+@RequestMapping("contact/")
+public class ContactController {
 
     @Autowired
-    AddressService addressService;
+    ContactService contactService;
 
     @Autowired
     ModelMapper mapper;
 
     @PostMapping("/save")
-    public ResponseEntity<Response> save(@Valid @RequestBody AddressPostDTO postDTO) {
+    public ResponseEntity<Response> save(@Valid @RequestBody ContactPostDTO postDTO) {
 
         Response response = new Response();
 
-        Address address = addressService.save(mapper.map(postDTO, Address.class));
+        Contact contact = contactService.save(mapper.map(postDTO, Contact.class));
 
         response.setCode(ResponseStatus.SUCCESS.value());
-        response.setMessage("Address saved successfully.");
-        response.setData(address);
+        response.setMessage("Contact saved successfully.");
+        response.setData(contact);
 
         return ResponseEntity.ok(response);
     }
 
 
-    @PutMapping("/update/{addressId}")
-    public ResponseEntity<Response> update(@Valid @RequestBody AddressPostDTO postDTO, @PathVariable(name = "addressId") Long addressId) {
+    @PutMapping("/update/{contactId}")
+    public ResponseEntity<Response> update(@Valid @RequestBody ContactPostDTO postDTO, @PathVariable(name = "contactId") Long contactId) {
 
         Response response = new Response();
 
         try {
 
-            Address address = mapper.map(postDTO, Address.class);
-            address.setId(addressId);
-            address = addressService.update(address);
+            Contact contact = mapper.map(postDTO, Contact.class);
+            contact.setId(contactId);
+            contact = contactService.update(contact);
 
             response.setCode(ResponseStatus.SUCCESS.value());
-            response.setMessage("Address updated successfully.");
-            response.setData(address);
+            response.setMessage("Contact updated successfully.");
+            response.setData(contact);
 
         } catch (NotFoundException e) {
             e.printStackTrace();
@@ -71,11 +71,11 @@ public class AddressController {
 
         Response response = new Response();
 
-        List<Address> addresses = addressService.getAll();
+        List<Contact> contacts = contactService.getAll();
 
         response.setCode(ResponseStatus.SUCCESS.value());
-        response.setMessage("Address(s) fetched successfully.");
-        response.setData(addresses);
+        response.setMessage("Contact(s) fetched successfully.");
+        response.setData(contacts);
 
         return ResponseEntity.ok(response);
     }
